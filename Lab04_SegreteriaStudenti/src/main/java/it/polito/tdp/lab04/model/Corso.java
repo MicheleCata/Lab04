@@ -73,7 +73,7 @@ public class Corso {
 
 	@Override
 	public String toString() {
-		return  this.nome ;
+		return  this.nome +"\n" ;
 	}
 	
 	public String descriviti() {

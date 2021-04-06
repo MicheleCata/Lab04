@@ -1,9 +1,6 @@
 package it.polito.tdp.lab04;
 
 import javafx.application.Application;
-import static javafx.application.Application.launch;
-
-import it.polito.tdp.lab04.FXMLController;
 import it.polito.tdp.lab04.model.Model;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -24,12 +21,11 @@ public class EntryPoint extends Application {
         /*
 		 * Create and set the model here!
 		 */
-		// controller.setModel();
+		 
         
         Model model = new Model();
         FXMLController controller= loader.getController();
         controller.setModel(model);
-        
         
         stage.setTitle("GESTIONE CORSI");
         stage.setScene(scene);

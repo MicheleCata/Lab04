@@ -9,7 +9,8 @@ public class TestModel {
 		/*
 		 * 	Write here your test model
 		 */
-		
+		model.getTuttiICorsi();
+		System.out.println(model.getCorsiStudente(200482));
 		
 		
 
