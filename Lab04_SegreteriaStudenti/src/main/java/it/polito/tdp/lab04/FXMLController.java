@@ -45,7 +45,7 @@ public class FXMLController {
 
     @FXML
     private TextField txtCognome;
-    
+
     @FXML
     private TextArea txtRisultato;
     
@@ -148,18 +148,54 @@ public class FXMLController {
 
     @FXML
     void doIscrivi(ActionEvent event) {
-
+    	
+    	txtRisultato.clear();
+    	
+    	Corso corso = boxCorsi.getValue();
+    	
+    	if (corso==null) {
+    		txtRisultato.setText("Scegli un corso!!");
+    		return;
+    	}
+    	
+    	String m = txtMatricola.getText();
+    	Integer matricola;
+    	if (m.length()==0) {
+    		txtRisultato.setText("Devi inserire una matricola!!");
+    		txtMatricola.clear();
+    		return;
+    	}
+    	
+    	try{
+    		matricola = Integer.parseInt(m);
+    	}catch (NumberFormatException ne){
+    		txtRisultato.setText("La matricola deve essere solo numerica ");
+    		txtMatricola.clear();
+    		return;
+    	}
+    	if (model.studenteIscritto(corso.getCodins(),matricola))
+    		txtRisultato.setText("Lo studente è già iscritto a questo corso!!");
+    	else {
+    		model.iscriviStudente(matricola, corso.getCodins());
+    		txtRisultato.setText("Iscrizione avvenuta con successo!!");
+    	}
+    		
     }
 
     @FXML
     void doReset(ActionEvent event) {
-
+    	
+    	txtRisultato.clear();
+    	txtMatricola.clear();
+    	txtNome.clear();
+    	txtCognome.clear();
+    	boxCorsi.setValue(null);
     }
     
     public void setModel (Model m) {
     	this.model=m;
     	
-    	boxCorsi.getItems().addAll(this.model.getTuttiICorsi());
+    	boxCorsi.getItems().addAll(model.getTuttiICorsi());
     	btnCheck.setStyle("-fx-background-color: green");
     	txtRisultato.setStyle("-fx-font-family: monospace");
     }

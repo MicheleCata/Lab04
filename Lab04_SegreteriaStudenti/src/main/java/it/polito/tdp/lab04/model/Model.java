@@ -38,4 +38,19 @@ public class Model {
 	public List<Corso> getCorsiStudente (Integer matricola) {
 		return studenteDao.getCorsiStudente(new Studente(matricola,null, null, null));
 	}
+	
+	public boolean studenteIscritto(String codice, Integer matricola) {
+		
+		List <Studente> studentiCorso = corsoDao.getStudentiIscrittiAlCorso(new Corso(codice, null, null, null));
+		Studente s= studenteDao.getNomeByMatricola(new Studente(matricola, null, null, null));
+		
+		if (studentiCorso.contains(s))
+			return true;
+		
+		return false;
+	}
+	
+	public boolean iscriviStudente (Integer matricola,String codice) {
+		return corsoDao.iscriviStudenteACorso(new Studente(matricola, null, null, null), new Corso(codice, null, null, null));
+	}
 }
